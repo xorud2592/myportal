@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace를 이용, 내부의 SQL 쿼리 객체를 실행 -->
+<mapper namespace="guestbook">
+	<!-- 전체 방명록 내용 불러오기 쿼리 -->
+	<!-- guestbook.selectAll로 호출
+		결과 데이터는 GuestbookVo로 반환 -->
+	<select id="selectAll" 
+		resultType="guestbookVo">
+	<![CDATA[
+	SELECT no, name, password, content, regdate as regDate
+	FROM guestbook
+	ORDER BY regdate DESC
+	]]>	
+	</select>
+	
+	<!-- 방명록 추가 쿼리 -->
+	<!-- guestbook.insert로 호출,
+		파라미터로 GuestbookVo -->
+	<!-- insert, update, delete는 결과로 영향을 받은 레코드의 수가 반환
+		resultType은 명시하지 않는다 -->
+	<insert id="insert" 
+		parameterType="guestbookVo">
+	<![CDATA[
+	INSERT INTO guestbook (no, name, password, content)
+	VALUES(seq_guestbook_no.nextval,
+			#{name}, #{password}, #{content}
+	)
+		
+	]]>	
+	</insert>
+	
+	<!-- 게시물 삭제 쿼리 -->
+	<delete id="delete"
+		parameterType="guestbookVo">
+	<![CDATA[
+	DELETE FROM guestbook
+	WHERE no = #{no} AND password = #{password}
+	]]>	
+	</delete>
+</mapper>
