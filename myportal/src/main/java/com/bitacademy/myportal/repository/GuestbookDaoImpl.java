@@ -3,6 +3,8 @@ package com.bitacademy.myportal.repository;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +15,9 @@ import com.bitacademy.myportal.vo.GuestbookVo;
 //@Repository("guestbookDao")
 public class GuestbookDaoImpl implements GuestbookDao {
 	//	데이터 소스 연결
+	
+	private static Logger logger = LoggerFactory.getLogger(GuestbookDaoImpl.class);
+
 	@Autowired
 	SqlSession sqlSession;
 	
@@ -20,7 +25,8 @@ public class GuestbookDaoImpl implements GuestbookDao {
 	public List<GuestbookVo> selectAll() {
 		//	TODO: 예외 전환 처리
 		List<GuestbookVo> list = sqlSession.selectList("guestbook.selectAll");
-		System.out.println("방명록:" + list);
+//		System.out.println("방명록:" + list);
+		logger.debug("방명록:" + list);
 		return list;
 	}
 

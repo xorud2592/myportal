@@ -4,12 +4,15 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <!-- MyBatis 설정 -->
 <configuration>
+	<!-- parameterType, resultType에서 사용하는 객체에는 별칭을 지어줄 수 있다. -->
 	<typeAliases>
 		<typeAlias alias="guestbookVo" type="com.bitacademy.myportal.vo.GuestbookVo" />
+		<typeAlias alias="memberVo"
+			type="com.bitacademy.myportal.vo.MemberVo" />
 	</typeAliases>
-	
 	<mappers>
 		<!-- guestbook에 관련된 매퍼 설정 -->
 		<mapper resource="mybatis/mappers/guestbook.xml" />
+		<mapper resource="mybatis/mappers/members.xml" />
 	</mappers>
 </configuration>

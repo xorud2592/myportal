@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="members">
+	<!-- 가입 (INSERT) -->
+	<insert id="insert" parameterType="memberVo">
+		<![CDATA[
+	INSERT INTO members (
+		no, name, email, password, gender)
+	VALUES(
+		seq_member_pk.nextval,
+		#{name}, 
+		#{email},
+		#{password},
+		#{gender}
+	)
+	]]>
+	</insert>
+	<!-- 로그인용 SELECT -->
+	
+	
+	<select id="selectUserByEmailAndPassword"
+		parameterType="map"
+		resultType="memberVo">
+	<![CDATA[
+	SELECT no, name, password, email, gender, joindate
+	FROM members
+	WHERE email=#{email} AND password=#{password}
+	]]>
+	</select>
+	
+	<select id="selectUserByEmail" parameterType="string" resultType="memberVo">
+		<![CDATA[
+	SELECT no, name, email, gender FROM members
+	WHERE email = #{value}
+	]]>
+	</select>
+</mapper>

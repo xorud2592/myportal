@@ -9,3 +9,5 @@ CREATE TABLE members (
 
 CREATE SEQUENCE seq_members_pk
     START WITH 1 INCREMENT BY 1 NOCACHE;
+    
+ALTER TABLE members MODIFY email varchar(128) UNIQUE;
